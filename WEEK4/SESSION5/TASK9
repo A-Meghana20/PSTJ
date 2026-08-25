@@ -1,0 +1,32 @@
+class Solution {
+    static ArrayList<ArrayList<Integer>> multiplyMatrix(
+        ArrayList<ArrayList<Integer>> mat1,
+        ArrayList<ArrayList<Integer>> mat2) {
+
+        int n = mat1.size();
+
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            ArrayList<Integer> row = new ArrayList<>();
+
+            for (int j = 0; j < n; j++) {
+                int sum = 0;
+
+                for (int k = 0; k < n; k++) {
+                    sum += mat1.get(i).get(k) * mat2.get(k).get(j);
+                }
+
+                row.add(sum);
+            }
+
+            result.add(row);
+        }
+
+        return result;
+    }
+}
+
+
+Input: mat1[][] = [[1, 2], [3, 4]], mat2[][] = [[4, 3], [2, 1]]
+Output: [[8, 5], [20, 13]]
