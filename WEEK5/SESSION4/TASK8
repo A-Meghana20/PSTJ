@@ -1,0 +1,45 @@
+class Solution {
+    public List<String> findAndReplacePattern(List<String> words, String pattern) {
+        List<String> result = new ArrayList<>();
+        
+        for (String word : words) {
+            if (matches(word, pattern)) {
+                result.add(word);
+            }
+        }
+        
+        return result;
+    }
+    
+    private boolean matches(String word, String pattern) {
+        if (word.length() != pattern.length()) {
+            return false;
+        }
+        
+        Map<Character, Character> w2p = new HashMap<>();
+        Map<Character, Character> p2w = new HashMap<>();
+        
+        for (int i = 0; i < word.length(); i++) {
+            char w = word.charAt(i);
+            char p = pattern.charAt(i);
+            
+            if (w2p.containsKey(w)) {
+                if (w2p.get(w) != p) {
+                    return false;
+                }
+            } else {
+                w2p.put(w, p);
+            }
+            
+            if (p2w.containsKey(p)) {
+                if (p2w.get(p) != w) {
+                    return false;
+                }
+            } else {
+                p2w.put(p, w);
+            }
+        }
+        
+        return true;
+    }
+}
