@@ -1,0 +1,61 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    // Find longest palindrome in a string
+    static int longestPalindrome(String s) {
+        int n = s.length();
+        int max = 1;
+
+        for (int i = 0; i < n; i++) {
+
+            // Odd length palindrome
+            int left = i;
+            int right = i;
+
+            while (left >= 0 && right < n &&
+                   s.charAt(left) == s.charAt(right)) {
+
+                max = Math.max(max, right - left + 1);
+                left--;
+                right++;
+            }
+
+            // Even length palindrome
+            left = i;
+            right = i + 1;
+
+            while (left >= 0 && right < n &&
+                   s.charAt(left) == s.charAt(right)) {
+
+                max = Math.max(max, right - left + 1);
+                left--;
+                right++;
+            }
+        }
+
+        return max;
+    }
+
+    public static void main(String[] args) throws Exception {
+
+        BufferedReader br =
+            new BufferedReader(new InputStreamReader(System.in));
+
+        int n = Integer.parseInt(br.readLine().trim());
+        String s = br.readLine().trim();
+
+        for (int rotation = 0; rotation < n; rotation++) {
+
+            // Create rotation
+            String rotated =
+                s.substring(rotation) + s.substring(0, rotation);
+
+            // Find longest palindromic substring
+            int answer = longestPalindrome(rotated);
+
+            System.out.println(answer);
+        }
+    }
+}
